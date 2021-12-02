@@ -130,6 +130,8 @@
 						})(marker, i)
 					);
 				}
+
+				//!Closing the info window when map is clicked
 				google.maps.event.addListener(map, 'click', function (e) {
 					infowindow.close();
 				});
