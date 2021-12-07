@@ -66,6 +66,41 @@
 			<script type="text/javascript">
 				var locations = [
 					['June 15, 2021  (Release site) ', -0.12105, -80.21509],
+
+					['June 17, 2021 ', 9.77595, -82.16535],
+					['June 18, 2021 ', 10.04709, -82.23032],
+					['June 19, 2021 ', 10.60155, -81.526],
+					['June 20, 2021 ', 10.96891, -81.62276],
+					['June 21, 2021 ', 11.69203, -81.55492],
+					['June 22, 2021 ', 12.03956, -81.66434],
+					['June 23, 2021 ', 12.54379, -81.92188],
+					['June 24, 2021 ', 12.78445, -82.20163],
+					['June 25, 2021 ', 13.06899, -82.67382],
+					['June 26, 2021 ', 13.53419, -83.00953],
+					['June 27, 2021 ', 14.10778, -83.28245],
+					['June 28, 2021 ', 14.75325, -83.23113],
+					['July 25, 2021 ', 26.23923, -89.88834],
+					['July 26, 2021 ', 27.57477, -90.07557],
+					['July 27, 2021 ', 28.20924, -90.00524],
+					['July 28, 2021 ', 28.71506, -89.83681],
+					['July 29, 2021 ', 29.13724, -89.44631],
+					['July 30, 2021 ', 29.01924, -88.55241],
+					['July 31, 2021 ', 29.08342, -88.85904],
+					['August 01, 2021 ', 29.31511, -88.43949],
+					['August 02, 2021 ', 29.60285, -87.85365],
+					['August 03, 2021 ', 29.843, -87.54668],
+					['August 04, 2021 ', 29.85174, -86.88922],
+					['August 05, 2021 ', 30.13984, -86.76042],
+					['August 06, 2021 ', 30.14742, -86.69465],
+					['August 07, 2021 ', 30.041, -86.56951],
+					['August 08, 2021 ', 30.38627, -86.5724],
+					['August 09, 2021 ', 30.37536, -86.9083],
+					['August 10, 2021 ', 30.32158, -87.07612],
+					['August 11, 2021 ', 30.24964, -87.28383],
+					['August 12, 2021 ', 30.21678, -87.46594],
+					['August 13, 2021 ', 30.19756, -87.68842],
+					['August 14, 2021 ', 30.1905, -87.75196],
+					['August 15, 2021 ', 30.1905, -87.7918],
 					['November 18, 2021 ', -0.9688029323416026, -85.99053685961857],
 					['November 19, 2021 ', 4.987782296162255, -114.4786158445137],
 					['November 20, 2021 ', -0.5217235740877532, -90.87448991892386],
@@ -93,7 +128,7 @@
 						locations[locations.length - 1][2]
 					),
 					streetViewControl: false,
-					mapTypeId: google.maps.MapTypeId.SATELLITE,
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
 				});
 
 				var infowindow = new google.maps.InfoWindow();
@@ -105,7 +140,7 @@
 					if (i == 0) {
 						var icon_selected = 'http://nakuplan.com/oceanblue/pin.png';
 					} else if (i < locations.length - 1) {
-						var icon_selected = 'http://nakuplan.com/oceanblue/pin.png';
+						var icon_selected = 'http://nakuplan.com/oceanblue/pant.png';
 					} else {
 						var icon_selected = 'http://nakuplan.com/oceanblue/turtle.png';
 					}

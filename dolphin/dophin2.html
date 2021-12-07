@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="Club Ocean ©" />
+		<title>oceanblue</title>
+		<meta name="robots" content="noindex, nofollow" />
+		<!-<link rel="shortcut icon" href="//cdn.shopify.com/s/files/1/0598/6202/4371/files/Sommnia_Favicon-3_32x32.png?v=1630951982" type="image/png">
+		-->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnEl2RxBw5w0u4WZsuxuPXe0BryUtPQrk"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+			integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+			crossorigin="anonymous"
+		></script>
+
+		<meta name="theme-color" content="#7952b3" />
+		<style>
+			.bd-placeholder-img {
+				font-size: 1.125rem;
+				text-anchor: middle;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				user-select: none;
+			}
+			@media (min-width: 768px) {
+				.bd-placeholder-img-lg {
+					font-size: 3.5rem;
+				}
+			}
+			.b-example-divider {
+				height: 3rem;
+				background-color: rgba(0, 0, 0, 0.1);
+				border: solid rgba(0, 0, 0, 0.15);
+				border-width: 1px 0;
+				box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+					inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+			}
+			@media (min-width: 992px) {
+				.rounded-lg-3 {
+					border-radius: 0.3rem;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<main>
+			<style>
+				.navbar-brand {
+					transform: translateX(-50%);
+					left: 50%;
+					position: relative;
+				}
+			</style>
+
+			<div id="map" style="width: 100%; height: 650px"></div>
+
+			<script type="text/javascript">
+				var locations = [
+					['June 15, 2021  (Release site) ', -0.12105, -80.21509],
+
+					['June 18, 2021', 23.045400552605162, -82.68510455648807],
+
+					['June 19, 2021', 23.045400552605162, -82.68510455648807],
+					['June 22, 2021', 23.045400552605162, -82.68510455648807],
+					['June 25 , 2021', 24.11097707622214, -83.17399614496237],
+					['June 27, 2021', 23.045400552605162, -82.68510455648807],
+					['June 29, 2021', 25.390502194163396, -82.35276812267043],
+					['June 31, 2021', 23.045400552605162, -82.68510455648807],
+
+					['July 01, 2021', 23.045400552605162, -82.68510455648807],
+					['July 03, 2021', 25.390502194163396, -82.35276812267043],
+					['July 06, 2021', 23.045400552605162, -82.68510455648807],
+					['July 08, 2021', 24.11097707622214, -83.17399614496237],
+					['July 10, 2021', 23.045400552605162, -82.68510455648807],
+					['July 12, 2021', 24.11097707622214, -83.17399614496237],
+					['July 15, 2021', 23.045400552605162, -82.68510455648807],
+					['July 16, 2021', 25.390502194163396, -82.35276812267043],
+					['July 18, 2021', 23.045400552605162, -82.68510455648807],
+					['July 20, 2021', 24.11097707622214, -83.17399614496237],
+					['July 22, 2021', 23.045400552605162, -82.68510455648807],
+					['July 27, 2021', 23.045400552605162, -82.68510455648807],
+					['July 29, 2021', 24.11097707622214, -83.17399614496237],
+					['July 30, 2021', 23.045400552605162, -82.68510455648807],
+
+					['August 01, 2021', 23.045400552605162, -82.68510455648807],
+					['August 03, 2021', 25.390502194163396, -82.35276812267043],
+					['August 06, 2021', 23.045400552605162, -82.68510455648807],
+					['August 08, 2021', 24.11097707622214, -83.17399614496237],
+					['August 10, 2021', 23.045400552605162, -82.68510455648807],
+					['August 12, 2021', 24.11097707622214, -83.17399614496237],
+					['August 15, 2021', 23.045400552605162, -82.68510455648807],
+					['August 16, 2021', 25.390502194163396, -82.35276812267043],
+					['August 18, 2021', 23.045400552605162, -82.68510455648807],
+					['August 20, 2021', 24.11097707622214, -83.17399614496237],
+					['August 22, 2021', 23.045400552605162, -82.68510455648807],
+					['August 27, 2021', 23.045400552605162, -82.68510455648807],
+					['August 29, 2021', 24.11097707622214, -83.17399614496237],
+					['August 30, 2021', 23.045400552605162, -82.68510455648807],
+
+					['September 01, 2021', 23.045400552605162, -82.68510455648807],
+					['September 03, 2021', 25.390502194163396, -82.35276812267043],
+					['September 06, 2021', 23.045400552605162, -82.68510455648807],
+					['September 08, 2021', 24.11097707622214, -83.17399614496237],
+					['September 10, 2021', 23.045400552605162, -82.68510455648807],
+					['September 12, 2021', 24.11097707622214, -83.17399614496237],
+					['September 15, 2021', 23.045400552605162, -82.68510455648807],
+					['September 16, 2021', 25.390502194163396, -82.35276812267043],
+					['September 18, 2021', 23.045400552605162, -82.68510455648807],
+					['September 20, 2021', 24.11097707622214, -83.17399614496237],
+					['September 22, 2021', 23.045400552605162, -82.68510455648807],
+					['September 27, 2021', 23.045400552605162, -82.68510455648807],
+					['September 29, 2021', 24.11097707622214, -83.17399614496237],
+					['September 30, 2021', 23.045400552605162, -82.68510455648807],
+
+					['October 01, 2021', 23.045400552605162, -82.68510455648807],
+					['October 03, 2021', 25.390502194163396, -82.35276812267043],
+					['October 06, 2021', 23.045400552605162, -82.68510455648807],
+					['October 08, 2021', 24.11097707622214, -83.17399614496237],
+					['October 10, 2021', 23.045400552605162, -82.68510455648807],
+					['October 12, 2021', 24.11097707622214, -83.17399614496237],
+					['October 15, 2021', 23.045400552605162, -82.68510455648807],
+					['October 16, 2021', 25.390502194163396, -82.35276812267043],
+					['October 18, 2021', 23.045400552605162, -82.68510455648807],
+					['October 20, 2021', 24.11097707622214, -83.17399614496237],
+					['October 22, 2021', 23.045400552605162, -82.68510455648807],
+					['October 27, 2021', 23.045400552605162, -82.68510455648807],
+					['October 29, 2021', 24.11097707622214, -83.17399614496237],
+					['October 30, 2021', 23.045400552605162, -82.68510455648807],
+
+					['November 01, 2021', 23.045400552605162, -82.68510455648807],
+					['November 03, 2021', 25.390502194163396, -82.35276812267043],
+					['November 06, 2021', 23.045400552605162, -82.68510455648807],
+					['November 07, 2021', 25.390502194163396, -82.35276812267043],
+					['November 08 2021 ', 24.11097707622214, -83.17399614496237],
+					['November 09 2021', 23.04453175913134, -82.67772311626796],
+					['November 10 2021', 24.035746232268547, -83.25364702038051],
+					['November 11 2021', 24.000623413816694, -83.03117388559198],
+					['November 12 2021', 23.04453175913134, -82.67772311626796],
+					['November 13 2021', 23.0689348235876, -82.69918078880433],
+					['November 15 2021', 24.416459574757248, -83.06413287417678],
+					['November 16 2021', 23.045400552605162, -82.68510455648807],
+					['November 17 2021', 25.940082971539034, -81.9078218530934],
+					['November 17,2021', 25.64332677586973, -81.47386191116024],
+					['November 18, 2021 ', -0.9688029323416026, -85.99053685961857],
+					['November 19, 2021 ', 4.987782296162255, -114.4786158445137],
+					['November 20, 2021 ', -0.5217235740877532, -90.87448991892386],
+					['November 21, 2021 ', 4.483452140636317, -92.09397228847315],
+					['November 22, 2021 ', 6.277197372985202, -87.30393326435392],
+					['November 23, 2021 ', 8.71690699424293, -86.77658950375023],
+					['November 24, 2021 ', 8.977441483616378, -91.87424572701048],
+					['November 25, 2021 ', 19.610032702457676, -106.09384715066115],
+					['November 26, 2021 ', 20.51814210479797, -108.90634713590819],
+					['November 27, 2021 ', 24.09515453239095, -108.81845653211559],
+					['November 28, 2021 ', 28.73735763205507, -115.41025338083685],
+					['November 29, 2021 ', 33.38424693918895, -118.44797309146497],
+					['November 30, 2021 ', 33.27409440964427, -118.76657660927987],
+					[
+						'December 01, 2021  (Current Location) ',
+						33.92835675008676,
+						-120.09042914548972,
+					],
+				];
+
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 10,
+					minZoom: 2,
+					center: new google.maps.LatLng(
+						locations[locations.length - 1][1],
+						locations[locations.length - 1][2]
+					),
+					streetViewControl: false,
+					mapTypeId: google.maps.MapTypeId.SATELLITE,
+				});
+
+				var infowindow = new google.maps.InfoWindow();
+
+				var marker, i;
+				var points = [];
+
+				for (i = 0; i < locations.length; i++) {
+					if (i == 0) {
+						var icon_selected = 'http://nakuplan.com/oceanblue/pin.png';
+					} else if (i < locations.length - 1) {
+						var icon_selected = 'http://nakuplan.com/oceanblue/pant.png';
+					} else {
+						var icon_selected = 'http://nakuplan.com/oceanblue/dolphin.png';
+					}
+
+					var point = new google.maps.LatLng(locations[i][1], locations[i][2]);
+					points.push(point);
+
+					marker = new google.maps.Marker({
+						position: point,
+						icon: icon_selected,
+						map: map,
+					});
+
+					google.maps.event.addListener(
+						marker,
+						'click',
+						(function (marker, i) {
+							return function () {
+								infowindow.setContent(locations[i][0]);
+								infowindow.open(map, marker);
+							};
+						})(marker, i)
+					);
+				}
+
+				//!Closing the info window when map is clicked
+				google.maps.event.addListener(map, 'click', function (e) {
+					infowindow.close();
+				});
+
+				var turtlePath = new google.maps.Polyline({
+					path: points,
+					geodesic: true,
+					strokeColor: '#FFFF00',
+					strokeOpacity: 1.0,
+					strokeWeight: 3,
+				});
+
+				turtlePath.setMap(map);
+
+				//! Hiding the date on clicking different parts in the map
+
+				$(document).on('click', '.copy_link', function (e) {
+					e.preventDefault();
+					value = $(this).attr('data-link');
+					var $temp = $('<input>');
+					$('body').append($temp);
+					$temp.val(value).select();
+					document.execCommand('copy');
+					$temp.remove();
+					alert('Le lien a été copié avec succès');
+				});
+			</script>
+		</main>
+	</body>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"
+	></script>
+</html>
