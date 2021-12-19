@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="Club Ocean ©" />
+		<title>Ocean Blue - Shark</title>
+		<meta name="robots" content="noindex, nofollow" />
+		<!-<link rel="shortcut icon" href="//cdn.shopify.com/s/files/1/0598/6202/4371/files/Sommnia_Favicon-3_32x32.png?v=1630951982" type="image/png">
+		-->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnEl2RxBw5w0u4WZsuxuPXe0BryUtPQrk"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+			integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+			crossorigin="anonymous"
+		></script>
+
+		<meta name="theme-color" content="#7952b3" />
+		<style>
+			.bd-placeholder-img {
+				font-size: 1.125rem;
+				text-anchor: middle;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				user-select: none;
+			}
+			@media (min-width: 768px) {
+				.bd-placeholder-img-lg {
+					font-size: 3.5rem;
+				}
+			}
+			.b-example-divider {
+				height: 3rem;
+				background-color: rgba(0, 0, 0, 0.1);
+				border: solid rgba(0, 0, 0, 0.15);
+				border-width: 1px 0;
+				box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+					inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+			}
+			@media (min-width: 992px) {
+				.rounded-lg-3 {
+					border-radius: 0.3rem;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<main>
+			<style>
+				.navbar-brand {
+					transform: translateX(-50%);
+					left: 50%;
+					position: relative;
+				}
+			</style>
+
+			<div id="map" style="width: 100%; height: 650px"></div>
+
+			<script type="text/javascript">
+				var locations = [
+		  ['July 15, 2021  (Release site) ', 23.02581184923766, -82.68330211100958],
+		  ['July 17, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['July 20, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['July 21, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['July 23, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['July 26, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['July 27, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['July 28, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['July 29, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['July 30, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['August 5, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['August 8, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['August 15, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['August 18, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['August 25, 2021   ', 23.02581184923766, -82.68330211100958],
+          ['September 7, 2021   ', 23.040503643711872, -82.67411822750981],
+          ['September 14, 2021   ', 23.040503643711872, -82.67411822750981],
+          ['September 21, 2021   ', 23.04453175913134, -82.67772311626796],
+          ['September 28, 2021   ', 23.045400552605162, -82.68510455648807],
+          ['October 5, 2021   ', 23.0689348235876, -82.69918078880433],
+          ['October 10, 2021   ', 23.071935542095424, -82.71342868246748],
+          ['October 15, 2021  ', 23.082990243145915, -82.70415896851793 ],
+          ['October 26, 2021   ', 23.945411043901842, -82.3500215716716],
+          ['October 29, 2021   ', 24.000623413816694, -83.03117388559198],
+          ['October 30, 2021   ', 24.1836582278901, -83.1382905801198],
+          ['November 18, 2021 ', 24.416459574757248, -83.06413287417678],
+          ['November 19, 2021 ', 24.623866640953587, -82.95701617964896],
+          ['November 20, 2021 ', 24.641343124141233, -83.09983843901936],
+          ['November 21, 2021 ', 25.169466733548028, -82.70982377109642 ],
+          ['November 22, 2021 ', 25.390502194163396, -82.35276812267043],
+          ['November 23, 2021 ', 25.440117582865092, -82.24839801005359],
+          ['November 24, 2021 ', 25.440117582865092, -82.24839801005359 ],   
+		  ['December 01, 2021 (Current Location)',25.440117582865092, -82.24839801005359,],
+				];
+
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 7,
+					center: new google.maps.LatLng(
+						locations[locations.length - 1][1],
+						locations[locations.length - 1][2]
+					),
+					streetViewControl: false,
+					mapTypeId: google.maps.MapTypeId.SATELLITE,
+				});
+
+				var infowindow = new google.maps.InfoWindow();
+
+				var marker, i;
+				var points = [];
+
+				for (i = 0; i < locations.length; i++) {
+					if (i == 0) {
+						var icon_selected = 'http://nakuplan.com/oceanblue/pin.png';
+					} else if (i < locations.length - 1) {
+						var icon_selected = 'http://nakuplan.com/oceanblue/pant.png';
+					} else {
+						var icon_selected = 'http://nakuplan.com/oceanblue/shark.png';
+					}
+
+					var point = new google.maps.LatLng(locations[i][1], locations[i][2]);
+					points.push(point);
+
+					marker = new google.maps.Marker({
+						position: point,
+						icon: icon_selected,
+						map: map,
+					});
+
+					google.maps.event.addListener(
+						marker,
+						'click',
+						(function (marker, i) {
+							return function () {
+
+								let date = new Date();
+								if(locations [i][0] == "December 01, 2021 (Current Location)"){
+									infowindow.setContent(date.toDateString());
+									console.log('twende FC');
+								}else {
+									infowindow.setContent(locations[i][0]);
+									console.log('frere FC');
+								}
+								
+								infowindow.open(map, marker);
+							};
+
+						})(marker, i)
+					);
+				}
+
+				//!Closing the info window when map is clicked
+				google.maps.event.addListener(map, 'click', function (e) {
+					infowindow.close();
+				});
+
+				var turtlePath = new google.maps.Polyline({
+					path: points,
+					geodesic: true,
+					strokeColor: '#FFFF00',
+					strokeOpacity: 1.0,
+					strokeWeight: 3,
+				});
+
+				turtlePath.setMap(map);
+
+				//! Hiding the date on clicking different parts in the map
+
+				$(document).on('click', '.copy_link', function (e) {
+					e.preventDefault();
+					value = $(this).attr('data-link');
+					var $temp = $('<input>');
+					$('body').append($temp);
+					$temp.val(value).select();
+					document.execCommand('copy');
+					$temp.remove();
+					alert('Le lien a été copié avec succès');
+				});
+			</script>
+		</main>
+	</body>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"
+	></script>
+</html>

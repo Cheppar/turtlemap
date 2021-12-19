@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="Club Ocean ©" />
+		<title>oceanblue</title>
+		<meta name="robots" content="noindex, nofollow" />
+		<!-<link rel="shortcut icon" href="//cdn.shopify.com/s/files/1/0598/6202/4371/files/Sommnia_Favicon-3_32x32.png?v=1630951982" type="image/png">
+		-->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnEl2RxBw5w0u4WZsuxuPXe0BryUtPQrk"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+			integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+			crossorigin="anonymous"
+		></script>
+
+		<meta name="theme-color" content="#7952b3" />
+		<style>
+			.bd-placeholder-img {
+				font-size: 1.125rem;
+				text-anchor: middle;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				user-select: none;
+			}
+			@media (min-width: 768px) {
+				.bd-placeholder-img-lg {
+					font-size: 3.5rem;
+				}
+			}
+			.b-example-divider {
+				height: 3rem;
+				background-color: rgba(0, 0, 0, 0.1);
+				border: solid rgba(0, 0, 0, 0.15);
+				border-width: 1px 0;
+				box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+					inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+			}
+			@media (min-width: 992px) {
+				.rounded-lg-3 {
+					border-radius: 0.3rem;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<main>
+			<style>
+				.navbar-brand {
+					transform: translateX(-50%);
+					left: 50%;
+					position: relative;
+				}
+			</style>
+
+			<div id="map" style="width: 100%; height: 650px"></div>
+
+			<script type="text/javascript">
+				var locations = [
+					['June 15, 2021  (Release site) ', 33.67709362296412, -78.89589183877253],
+					['July 01, 2021', 33.53183311729043, -78.77538555086564],
+					['July 03, 2021', 33.41499016517518, -78.99236553313084],
+					['July 06, 2021', 33.36109777057089, -79.02532451691523],
+					['July 08, 2021', 33.366832591918836, -78.99099224213982],
+					['August 01, 2021', 33.35421548605716, -79.00335186105897],
+					['August 03, 2021', 33.257806387820956, -79.09810893943911],
+					['August 06, 2021', 33.19692202316707, -79.15990703285365],
+					['August 22, 2021', 33.115293576928764, -78.97863262203944],
+					['August 27, 2021', 33.0784784637755, -78.9594065481652],
+					['August 29, 2021', 33.03474049679149, -79.03631084366215],
+					['August 30, 2021', 33.17048732529872, -79.12557475807823],
+					['September 01, 2021', 33.01171178824959, -79.023951224743],
+					['September 22, 2021', 33.02437832245167, -78.9580332571742],
+					['September 27, 2021', 33.003650315817644, -79.04592388185428],
+					['September 29, 2021', 32.961027456125485, -79.26839702239899],
+					['September 30, 2021', 33.00710532139379, -79.30135600618337],
+					['October 01, 2021', 32.44331690822329, -77.6286875633019],
+					['October 03, 2021', 30.730795555898073, -79.52932222990316],
+					['October 06, 2021', 28.804545354816394, -75.94777932533157],
+					['October 08, 2021', 27.740240150776877, -75.57424417577505],
+					['October 29, 2021', 27.85686123462502, -74.3218027919678],
+					['October 30, 2021', 26.92041324461619, -78.54055271637114],
+					['November 01, 2021', 27.13571485634737, -78.91408786592767],
+					['November 03, 2021', 26.56721472839112, -79.55129488575943],
+					['November 06, 2021', 25.699263681294855, -79.61721285332824],
+					['November 07, 2021', 24.505452682620145, -80.16652924973492],
+					['November 27, 2021 ', 21.920939481979595, -76.62893172459786],
+					['November 28, 2021 ', 20.98022187720697, -74.36574817140232],
+					['November 29, 2021 ', 20.198602219556307, -73.70656843192963],
+					['November 30, 2021 ', 20.816004242293616, -71.75100203886969],
+					[
+						'December 01, 2021  (Current Location) ',
+						21.164751125321388, -69.9272716027995,
+					],
+				];
+
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 10,
+					minZoom: 2,
+					center: new google.maps.LatLng(
+						locations[locations.length - 1][1],
+						locations[locations.length - 1][2]
+					),
+					streetViewControl: false,
+					mapTypeId: google.maps.MapTypeId.SATELLITE,
+				});
+
+				var infowindow = new google.maps.InfoWindow();
+
+				var marker, i;
+				var points = [];
+
+				for (i = 0; i < locations.length; i++) {
+					if (i == 0) {
+						var icon_selected = 'http://nakuplan.com/oceanblue/pin.png';
+					} else if (i < locations.length - 1) {
+						var icon_selected = 'http://nakuplan.com/oceanblue/pant.png';
+					} else {
+						var icon_selected = 'http://nakuplan.com/oceanblue/shark.png';
+					}
+
+					var point = new google.maps.LatLng(locations[i][1], locations[i][2]);
+					points.push(point);
+
+					marker = new google.maps.Marker({
+						position: point,
+						icon: icon_selected,
+						map: map,
+					});
+
+					google.maps.event.addListener(
+						marker,
+						'click',
+						(function (marker, i) {
+							return function () {
+
+								let date = new Date();
+								if(locations [i][0] == "December 01, 2021  (Current Location) "){
+									infowindow.setContent(date.toDateString());
+									//console.log('twende FC');
+								}else {
+									infowindow.setContent(locations[i][0]);
+									//console.log('frere FC');
+								}
+								
+								infowindow.open(map, marker);
+							};
+
+						})(marker, i)
+					);
+				}
+
+				//!Closing the info window when map is clicked
+				google.maps.event.addListener(map, 'click', function (e) {
+					infowindow.close();
+				});
+
+				var turtlePath = new google.maps.Polyline({
+					path: points,
+					geodesic: true,
+					strokeColor: '#FFFF00',
+					strokeOpacity: 1.0,
+					strokeWeight: 3,
+				});
+
+				turtlePath.setMap(map);
+
+				//! Hiding the date on clicking different parts in the map
+
+				$(document).on('click', '.copy_link', function (e) {
+					e.preventDefault();
+					value = $(this).attr('data-link');
+					var $temp = $('<input>');
+					$('body').append($temp);
+					$temp.val(value).select();
+					document.execCommand('copy');
+					$temp.remove();
+					alert('Le lien a été copié avec succès');
+				});
+			</script>
+		</main>
+	</body>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"
+	></script>
+</html>
