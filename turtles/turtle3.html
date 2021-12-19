@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Club Ocean ©" />
+    <title>Ocean Blue - turtle ©</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <!-<link rel="shortcut icon" href="//cdn.shopify.com/s/files/1/0598/6202/4371/files/Sommnia_Favicon-3_32x32.png?v=1630951982" type="image/png">
+    -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnEl2RxBw5w0u4WZsuxuPXe0BryUtPQrk"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+      integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+      crossorigin="anonymous"
+    ></script>
+
+    <meta name="theme-color" content="#7952b3" />
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, 0.1);
+        border: solid rgba(0, 0, 0, 0.15);
+        border-width: 1px 0;
+        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+          inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+      }
+      @media (min-width: 992px) {
+        .rounded-lg-3 {
+          border-radius: 0.3rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <style>
+        .navbar-brand {
+          transform: translateX(-50%);
+          left: 50%;
+          position: relative;
+        }
+      </style>
+
+      <div id="map" style="width: 100%; height: 650px"></div>
+
+      <script type="text/javascript">
+        var locations = [
+          ['September 15, 2020  (Release site) ', 29.00134519888225, -82.76481277582175],
+          ['November 17, 2020   ', 29.010052747088608, -82.76773101910217],
+          ['November 18, 2020   ', 29.014106010617258, -82.7838671878291],
+          ['November 20, 2020   ', 29.025064037960124, -82.7799189763321],
+          ['December 21, 2020   ', 29.023262798249938, -82.76871807197641],
+          ['December 22, 2020   ', 29.022437219548976, -82.76365406157807],
+          ['December 23, 2020   ', 29.018459338754123, -82.767473527048],
+          ['January 10, 2021   ', 29.018046531029107, -82.76725895033621],
+          ['January 25, 2021  ', 29.021348946631658, -82.76850349526462 ],
+          ['January 26, 2021   ', 29.018646978083734, -82.77000553224717],
+          ['March 27, 2021   ', 29.018684505908734, -82.77502662730316],
+          ['March 28, 2021   ', 29.022587325258257, -82.77326709826646],
+          ['March 29, 2021  ',  29.02315021972482, -82.77099258512143],
+          ['April 30, 2021   ', 29.021761741157196, -82.77086383909435],
+          ['April 18, 2021 ',29.021761741157196, -82.77086383909435 ],
+          ['April 19, 2021 ', 29.023300324397695, -82.76554233664186],
+          ['June 20, 2021 ', 29.023300324397695, -82.76554233664186],
+          ['June 29, 2021 ', 29.022699904397022, -82.77455455853722],
+          ['July 22, 2021 ', 29.022699904397022, -82.77455455853722],
+          ['July 23, 2021 ', 29.02228711362151, -82.77884609277311],
+          ['August 24, 2021 ',29.019360004427273, -82.77356750566297 ],
+          ['August 25, 2021 ', 29.019360004427273, -82.77356750566297],
+          ['September 26, 2021 ', 29.059544231813025, -84.23080089881198],
+          ['September 27, 2021 ', 29.562481382340135, -84.47799327079922],
+          ['October 28, 2021 ', 29.62935197799669, -84.05501965650993],
+          ['November 29, 2021 ', 29.093150366689365, -84.76363778954003],
+          ['November 30, 2021 ', 28.462426927035086, -85.8183254300278],
+          [
+            'December 04, 2021  (Current Location) ',
+            27.30688227998376, -87.77389174149663],
+        ];
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: new google.maps.LatLng(
+            locations[locations.length - 1][1],
+            locations[locations.length - 1][2]
+          ),
+          streetViewControl: false,
+          mapTypeId: google.maps.MapTypeId.SATELLITE,
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+        var points = [];
+
+        for (i = 0; i < locations.length; i++) {
+          if (i == 0) {
+            var icon_selected = 'http://nakuplan.com/oceanblue/pin.png';
+          } else if (i < locations.length - 1) {
+            var icon_selected = 'http://nakuplan.com/oceanblue/pant.png';
+          } else {
+            var icon_selected = 'http://nakuplan.com/oceanblue/turtle3.png';
+          }
+
+          var point = new google.maps.LatLng(locations[i][1], locations[i][2]);
+          points.push(point);
+
+          marker = new google.maps.Marker({
+            position: point,
+            icon: icon_selected,
+            map: map,
+          });
+
+         google.maps.event.addListener(
+            marker,
+            'click',
+            (function (marker, i) {
+              return function () {
+
+                let date = new Date();
+                if(locations [i][0] == "December 04, 2021  (Current Location) "){
+                  infowindow.setContent(date.toDateString());
+                  //console.log('twende FC');
+                }else {
+                  infowindow.setContent(locations[i][0]);
+                  //console.log('frere FC');
+                }
+                
+                infowindow.open(map, marker);
+              };
+
+            })(marker, i)
+          );
+        }
+
+        //!Closing the info window when map is clicked
+        google.maps.event.addListener(map, 'click', function (e) {
+          infowindow.close();
+        });
+
+        var turtlePath = new google.maps.Polyline({
+          path: points,
+          geodesic: true,
+          strokeColor: '#FFFF00',
+          strokeOpacity: 1.0,
+          strokeWeight: 3,
+        });
+
+        turtlePath.setMap(map);
+
+        //! Hiding the date on clicking different parts in the map
+
+        $(document).on('click', '.copy_link', function (e) {
+          e.preventDefault();
+          value = $(this).attr('data-link');
+          var $temp = $('<input>');
+          $('body').append($temp);
+          $temp.val(value).select();
+          document.execCommand('copy');
+          $temp.remove();
+          alert('Le lien a été copié avec succès');
+        });
+      </script>
+    </main>
+  </body>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"
+  ></script>
+</html>
